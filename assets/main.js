@@ -2,11 +2,13 @@
   const toggle = document.querySelector('.nav-toggle');
   const links = document.querySelector('.links');
 
-  function closeMenu() {
+  function closeMenu(returnFocus = false) {
     if (!toggle || !links) return;
+    const wasOpen = links.classList.contains('open');
     links.classList.remove('open');
     toggle.setAttribute('aria-expanded', 'false');
     toggle.setAttribute('aria-label', 'Open navigation');
+    if (returnFocus && wasOpen) toggle.focus();
   }
 
   if (toggle && links) {
@@ -15,11 +17,12 @@
       toggle.setAttribute('aria-expanded', String(open));
       toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
     });
-    toggle.addEventListener('keydown', event => {
-      if (event.key === 'Escape') closeMenu();
-    });
     links.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
   }
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeMenu(true);
+  });
 
   document.querySelectorAll('[data-year]').forEach(element => {
     element.textContent = new Date().getFullYear();

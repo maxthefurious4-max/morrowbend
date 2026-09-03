@@ -1,3 +1,3 @@
-# Morrowbend public website
+# Morrowbend public site
 
-Generated public deployment artifact. Operational documents and source research remain in a separate private repository.
+Deployment-only artifact. Private operations files are not included.
